@@ -1,0 +1,84 @@
+<div class="card"> 
+  <div class="card-header fw-bold">
+    Manage Users
+    <app-progressebar [loading]="loading" message="Chargement..."></app-progressebar>
+  </div>
+  <div class="card-body">
+   <!-- Tableau -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-primary text-center">
+          <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of users; let i = index">
+            <!-- Ligne principale -->
+            <tr (click)="toggleDetails(i)" style="cursor: pointer;">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+            </tr>
+
+            <!-- Ligne collapsée avec détails -->
+            <tr [class.collapse]="!user.showDetails">
+              <td colspan="4">
+                <div class="card card-body bg-light">
+                  <p><strong>Username :</strong> {{ user.username }}</p>
+                  <p><strong>Email :</strong> {{ user.email }}</p>
+                  
+                  <!-- Rôles -->
+                  <div>
+                    <strong>Rôles :</strong>
+                    <div class="d-flex flex-wrap gap-3 mt-2">
+                      <ng-container *ngFor="let role of rolesList">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox"
+                                [checked]="hasRole(user, role)"
+                                (change)="onRoleChange(user, role, $event)">
+                          <label class="form-check-label">
+                            {{ role.name }}
+                          </label>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                  <!-- Statut -->
+                  <p class="mt-3">
+                    <strong>Active :</strong>
+                    <span *ngIf="user.active" class="badge bg-success">Oui</span>
+                    <span *ngIf="!user.active" class="badge bg-danger">Non</span>
+                  </p>
+
+                  <!-- Actions -->
+                  <div class="d-flex justify-content-end gap-2 mt-3">
+                    <button class="btn btn-warning" (click)="toggleBlock(user)">
+                      <i class="bi" [ngClass]="user.active ? 'bi-lock-fill' : 'bi-unlock-fill'"></i>
+                      {{ user.active ? ' Bloquer' : ' Débloquer' }}
+                    </button>
+                    <button class="btn btn-primary" (click)="saveRoles(user)">
+                      <i class="bi bi-save-fill"></i> Sauvegarder Rôles
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <tfoot class="table-light">
+          <tr>
+            <td colspan="4">
+              Nombre total d’utilisateurs : <strong>{{ users.length }}</strong>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

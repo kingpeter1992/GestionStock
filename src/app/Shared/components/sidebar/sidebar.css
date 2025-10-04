@@ -1,0 +1,7 @@
+.sidebar {
+  transition: all 0.3s;
+}
+
+.sidebar.collapsed {
+  margin-left: -250px; /* cache la sidebar */
+}

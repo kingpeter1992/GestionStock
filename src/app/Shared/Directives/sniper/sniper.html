@@ -1,0 +1,5 @@
+ <!-- Spinner -->
+        <p>Chargement...</p>
+        <div *ngIf="loading$ | async" class="spinner-container">
+          <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>

@@ -1,0 +1,13 @@
+/* Sidebar toggle effect */
+#wrapper {
+  transition: all 0.3s;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: -250px; /* cache la sidebar */
+}
+
+#sidebar-wrapper {
+  width: 250px;
+  transition: all 0.3s;
+}

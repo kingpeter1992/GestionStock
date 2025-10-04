@@ -1,0 +1,28 @@
+.profile-card {
+  max-width: 420px;
+  margin: 50px auto;
+  border-radius: 16px;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.profile-icon i {
+  font-size: 80px;
+  color: #007bff;
+  background: rgba(0, 123, 255, 0.1);
+  padding: 25px;
+  border-radius: 50%;
+}
+
+.roles-section ul {
+  padding-left: 0;
+}
+
+.bg-info-subtle {
+  background-color: rgba(13, 202, 240, 0.15) !important;
+}

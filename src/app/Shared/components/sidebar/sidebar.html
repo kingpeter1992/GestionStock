@@ -1,0 +1,40 @@
+<div class="bg-light border-end" id="sidebar-wrapper" [ngClass]="{'collapsed': collapsed}" style="width:250px;">
+  <!-- Header sidebar -->
+  <div class="sidebar-heading text-center py-4 text-white bg-primary">
+    <strong>RA</strong> | RuangAdmin
+  </div>
+
+  <div class="list-group list-group-flush">
+
+    <a routerLink="#" class="list-group-item list-group-item-action bg-light">
+      <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+    </a>
+
+    <!-- Menu dynamique -->
+    <ng-container *ngFor="let menu of menuPropertisMenusUser.concat(menuPropertisAchat, menuPropertisClient, menuPropertisVente, menuPropertInteroogation, menuPropertisInventaire)">
+      
+      <!-- Menu principal -->
+      <a class="list-group-item list-group-item-action bg-light d-flex justify-content-between align-items-center"
+         data-bs-toggle="collapse" [attr.href]="'#menu-'+menu.id" role="button">
+        <span>
+          <i class="{{menu.icon}} me-2"></i> <!-- Icône du menu principal -->
+          {{menu.titre}}
+        </span>
+        <i class="fas fa-chevron-down"></i>
+      </a>
+
+      <!-- Sous-menus -->
+      <div [attr.id]="'menu-'+menu.id" class="collapse">
+        <ng-container *ngFor="let sousMenu of menu.sousMenus">
+          <a class="list-group-item list-group-item-action bg-light ps-5"
+             (click)="navigate(sousMenu.url)">
+            <i class="{{sousMenu.icon}} me-2"></i> <!-- Icône du sous-menu -->
+            {{sousMenu.titre}}
+          </a>
+        </ng-container>
+      </div>
+
+    </ng-container>
+
+  </div>
+</div>
