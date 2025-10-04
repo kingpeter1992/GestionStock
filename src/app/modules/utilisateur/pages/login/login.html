@@ -1,91 +1,83 @@
 <body class="bg-gradient-login">
-  <!-- Login Content -->
+  <div class="container-login d-flex align-items-center justify-content-center vh-100">
+    <div class="card shadow-lg border-0 rounded-4" style="width: 420px; backdrop-filter: blur(10px)">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold text-primary mb-1">Welcome Back</h2>
+          <p class="text-muted">Please sign in to continue</p>
+        </div>
 
-  <div class="container-login">
-    <div class="row justify-content-center">
-      <div class="col-xl-6 col-lg-12 col-md-9">
-        <div class="card shadow-sm my-5">
-          <div class="card-body p-0">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="login-form">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
-                  </div>
-                  <app-progressebar [loading]="loading" message="Chargement..."></app-progressebar>
-                 
-                  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="user">
-                    <!-- Email -->
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        formControlName="username"
-                        class="form-control"
-                        placeholder="Enter username"
-                      />
-                      <div *ngIf="submitted && f['username'].errors" class="text-danger small mt-1">
-                        <div *ngIf="f['username'].errors['required']">Email is required</div>
-                        <div *ngIf="f['username'].errors['username']">Enter a valid username</div>
-                      </div>
-                    </div>
+        <!-- ProgressBar -->
+        <app-progressebar [loading]="loading" message="Chargement..."></app-progressebar>
 
-                    <!-- Password -->
-                    <div class="form-group">
-                      <input
-                        type="password"
-                        formControlName="password"
-                        class="form-control"
-                        placeholder="Password"
-                      />
-                      <div *ngIf="submitted && f['password'].errors" class="text-danger small mt-1">
-                        <div *ngIf="f['password'].errors['required']">Password is required</div>
-                        <div *ngIf="f['password'].errors['minlength']">
-                          Password must be at least 6 characters
-                        </div>
-                      </div>
-                    </div>
-                    @if (f['submitted'] && isLoginFailed) {
-                              <div class="alert alert-danger" role="alert">
-                                Login failed: {{ errorMessage }}
-                              </div>
-                              }
-                    <!-- Remember me -->
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small" style="line-height: 1.5rem">
-                        <input
-                          type="checkbox"
-                          formControlName="rememberMe"
-                          class="custom-control-input"
-                          id="customCheck"
-                        />
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="user">
+          <!-- Username -->
+          <div class="form-group mb-3">
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control form-control-lg rounded-3"
+              placeholder="Enter your username"
+            />
+            <div *ngIf="submitted && f['username'].errors" class="text-danger small mt-1">
+              <div *ngIf="f['username'].errors['required']">Username is required</div>
+            </div>
+          </div>
 
-                    <!-- Submit -->
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </div>
-                  </form>
-
-                  <hr />
-                  <div class="text-center">
-                    <a class="font-weight-bold small" routerLink="/forgarpaaword" >Forgot password</a
-                    >
-                  </div>
-                  <hr />
-                  <div class="text-center">
-                    <a class="font-weight-bold small" routerLink="/singup">Create an Account!</a
-                    >
-                  </div>
-                  <div class="text-center"></div>
-                </div>
+          <!-- Password -->
+          <div class="form-group mb-3">
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control form-control-lg rounded-3"
+              placeholder="Enter your password"
+            />
+            <div *ngIf="submitted && f['password'].errors" class="text-danger small mt-1">
+              <div *ngIf="f['password'].errors['required']">Password is required</div>
+              <div *ngIf="f['password'].errors['minlength']">
+                Password must be at least 6 characters
               </div>
             </div>
           </div>
+
+          <!-- Error Message -->
+          <div *ngIf="isLoginFailed" class="alert alert-danger py-2 text-center">
+            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+            {{ errorMessage }}
+          </div>
+
+          <!-- Remember Me -->
+          <div class="form-group mb-3 d-flex align-items-center">
+            <input
+              type="checkbox"
+              formControlName="rememberMe"
+              class="form-check-input me-2"
+              id="rememberCheck"
+            />
+            <label class="form-check-label" for="rememberCheck">Remember me</label>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary w-100 py-2 rounded-3 fw-semibold"
+            [disabled]="loading"
+          >
+            <i class="fa-solid fa-right-to-bracket me-2"></i> Login
+          </button>
+        </form>
+
+        <hr />
+
+        <div class="text-center small">
+          <a routerLink="/forgarpaaword" class="text-decoration-none">Forgot password?</a>
+        </div>
+
+        <div class="text-center small mt-2">
+          <a routerLink="/signup" class="text-decoration-none">Create an account</a>
         </div>
       </div>
     </div>
   </div>
-  <!-- Login Content -->
 </body>
